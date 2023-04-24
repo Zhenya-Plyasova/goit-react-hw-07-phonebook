@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { nanoid } from "@reduxjs/toolkit";
 
-const contactsInitialState = {items: []};
+const contactsInitialState = {items: [], isLoading: false, error: null};
 
 export const contactsSlice = createSlice({
     name: 'contacts',
@@ -18,8 +18,21 @@ export const contactsSlice = createSlice({
             const index = state.items.findIndex(contact => contact.id === action.payload);
             state.items.splice(index, 1);
         },
+        fetchingInProgress(state) {
+            state.isLoading = true;
+        },
+        fetchingSuccess(state, {payload}) {
+            state.isLoading = false;
+            state.items = payload;
+            state.error = null;
+        },
+        fetchingRegected(state, { payload }) {
+            state.error = payload;
+            state.isLoading = false;
+        }
     }
 });
 
 export const { addContact, removeContact } = contactsSlice.actions;
 export const contactsReducer = contactsSlice.reducer;
+export const { fetchingInProgress, fetchingRegected, fetchingSuccess } = contactsSlice.actions;

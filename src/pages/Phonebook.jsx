@@ -8,7 +8,7 @@ import { getContacts } from "redux/selectors";
 
 export const Phonebook = () => {
   const dispatch = useDispatch();
-  const { items, isLoading, error } = useSelector(getContacts);
+  const { isLoading, error } = useSelector(getContacts);
 
   useEffect(() => {
     dispatch(fetchContacts());

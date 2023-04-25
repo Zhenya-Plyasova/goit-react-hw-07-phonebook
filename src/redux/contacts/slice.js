@@ -1,14 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { nanoid } from "@reduxjs/toolkit";
 import { addContact, fetchContacts, removeContact } from "redux/operations";
 
 const contactsInitialState = { items: [], isLoading: false, error: null };
 
 const handlePending = state => { state.isLoading = true; };
-const handleFulfield = (state) => {
-    state.isLoading = false;
-    state.error = null;
-};
 const handleRejected = (state, { payload }) => {
     state.error = payload;
     state.isLoading = false;   
@@ -45,6 +40,5 @@ export const contactsSlice = createSlice({
     },
 );
 
-// export const { removeContact } = contactsSlice.actions;
 export const contactsReducer = contactsSlice.reducer;
 export const { fetchingInProgress, fetchingRegected, fetchingSuccess } = contactsSlice.actions;

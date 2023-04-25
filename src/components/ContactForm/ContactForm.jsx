@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import css from './ContactForm.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from 'redux/contacts/slice';
+import { addContact } from 'redux/operations';
 import { getContacts } from 'redux/selectors';
 
 export const ContactForm = () => {
@@ -11,9 +11,9 @@ export const ContactForm = () => {
   const dispatch = useDispatch();
   const prevContacts = useSelector(getContacts);
 
-  const createContact = (newName) => {
+  const createContact = (newName, number) => {
     const checkNewContact = 
-      prevContacts.find(({ name }) => name === newName);
+      prevContacts.items.find(({ name }) => name === newName);
     if (checkNewContact) {
       return alert(`${newName} is already in contacts`)
     };
